@@ -14,7 +14,7 @@ import { registerRoutesV1 } from "api";
 // dotenv.config();
 const corsOptions: CorsOptions = {
      credentials: true,
-     // origin: ["http://localhost:8081/", "http://localhost:8081", "http://localhost:3000/", "http://localhost:3000"],
+     origin: ["http://localhost:8081/", "http://localhost:8081", "http://localhost:3000/", "http://localhost:3000"],
 
      optionsSuccessStatus: 200,
 };

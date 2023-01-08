@@ -61,14 +61,13 @@ export class EventController implements IController {
      public async NewEvent(req: Request, res: Response) {
           try {
                const { description, name, pics }: INewEventProps = req.body;
+               console.log(req.body);
                const newEvent = await new Event({
                     pics,
                     name,
                     description,
                }).save();
-               if (newEvent.name) {
-                    return Ok(res, `${newEvent.title} has been uploaded`);
-               }
+               return Ok(res, `${newEvent.name} has been uploaded`);
           } catch (err) {
                return UnAuthorized(res, err);
           }
@@ -93,12 +92,10 @@ export class EventController implements IController {
      }
      public async DeleteEvents(req: Request, res: Response) {
           try {
-               const _id = req.params._id;
+               const _id = req.params.eventid;
                const deleteQuery = await Event.findByIdAndDelete({ _id });
 
-               if (deleteQuery) {
-                    return Ok(res, `${deleteQuery.name} has been deleted`);
-               }
+               return Ok(res, `${deleteQuery.name} has been deleted`);
           } catch (err) {
                return UnAuthorized(res, err);
           }

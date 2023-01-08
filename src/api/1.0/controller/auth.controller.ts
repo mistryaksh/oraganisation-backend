@@ -106,10 +106,13 @@ export class AuthController implements IController {
                     process.env.JWT_SECRET || config.get("JWT_SECRET"),
                     { expiresIn: process.env.JWT_EXPIRE || config.get("JWT_EXPIRE"), algorithm: "HS256" }
                );
+               var now = Date.now();
 
                res.cookie("access_token", token, {
-                    httpOnly: process.env.NODE_ENV === "development" ? false : true,
-                    sameSite: true,
+                    httpOnly: true,
+                    // sameSite: false,
+                    // secure: false,
+                    // expires: new Date(new Date(now).setHours(now + 3)),
                });
 
                return Ok(res, {
@@ -117,6 +120,7 @@ export class AuthController implements IController {
                     token,
                });
           } catch (err) {
+               console.log(err);
                return UnAuthorized(res, err);
           }
      }

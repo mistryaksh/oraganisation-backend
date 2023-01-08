@@ -1,6 +1,6 @@
 import { Express } from "express";
 import { IController } from "types";
-import { HomeController, AuthController, GalleryController, AboutController } from "./controller";
+import { HomeController, AuthController, GalleryController, AboutController, EventController } from "./controller";
 
 const routesHandler = (express: Express, controller: IController) => {
      for (const route of controller.routes) {
@@ -29,4 +29,5 @@ export const registerRoutesV1 = (express: Express) => {
      routesHandler(express, new AuthController());
      routesHandler(express, new GalleryController());
      routesHandler(express, new AboutController());
+     routesHandler(express, new EventController());
 };
